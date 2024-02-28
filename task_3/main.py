@@ -46,7 +46,14 @@ def save_index_to_file(index, index_file_name):
             file.write(f'{{"word":"{key}", "count":{count},"inverted_array":{array}}}\n')
 
 
-def search(index, query, lemmatizer):
+def create_index(index_file_name, html_dir, lemma_file_name):
+    lemmas_dir = read_lemmas_from_file(lemma_file_name)
+    # В pages хранятся все выгруженные html-странички
+    index = build_index_from_html_files(html_dir, lemmas_dir)
+    save_index_to_file(index, index_file_name)
+
+
+def boolean_search(index, query, lemmatizer):
     AND, OR, NOT = map(CaselessLiteral, ["AND", "OR", "NOT"])
     term = Word(srange("[а-яА-Я]"))
 
@@ -77,13 +84,6 @@ def search(index, query, lemmatizer):
     return interpret_expr(parsed_query, index)
 
 
-def create_index(index_file_name):
-    lemmas_dir = read_lemmas_from_file('lemma_1.txt')
-    # В pages хранятся все выгруженные html-странички
-    index = build_index_from_html_files('/pages', lemmas_dir)
-    save_index_to_file(index, index_file_name)
-
-
 def get_index(index_file_name):
     index = {}
     with open(index_file_name, 'r', encoding='utf-8') as file:
@@ -97,7 +97,9 @@ def get_index(index_file_name):
 def main():
     index_file_name = 'inverted_index.txt'
     # Вызываем единожды для создания inverted_index.txt файла
-    # create_index(index_file_name)
+    # lemma_file_name = 'lemma_1.txt'
+    # html_dir = '/pages'
+    # create_index(index_file_name, html_dir, lemma_file_name)
 
     index = get_index(index_file_name)
     lemmatizer = MorphAnalyzer()
@@ -105,7 +107,7 @@ def main():
     while True:
         query = input("Введите запрос: ")
         try:
-            results = search(index, query, lemmatizer)
+            results = boolean_search(index, query, lemmatizer)
             print("Результаты поиска:", results)
         except Exception:
             print("Не найдено")
