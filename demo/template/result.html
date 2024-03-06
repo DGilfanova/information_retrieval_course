@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Вывод значений</title>
+</head>
+<style>
+    h1 {
+        font-size: 2rem;
+        color: #4a70d0;
+    }
+
+    h2 {
+        font-size: 1.5rem;
+        color: #4a70d0;
+    }
+
+    ul li {
+        list-style-type: decimal;
+        margin-bottom: 0.5rem;
+    }
+
+    a {
+        color: #6c757d;
+        text-decoration: underline;
+    }
+
+    a:hover {
+        color: #5f6975;
+    }
+</style>
+
+<body>
+<h1>Результат поиска</h1>
+<h2>Ваш запрос: {{input_value}}</h2>
+<ul>
+    {% for value in result %}
+    <li><a href={{ value }}>{{ value }}</a></li>
+    {% endfor %}
+</ul>
+</body>
+</html>

@@ -1,0 +1,55 @@
+<html>
+                <head>
+                    <title>Страница ввода запроса</title>
+                    <style>
+                        body{
+                            background-color: #f0f8ff;
+                            font-family: Arial, sans-serif;
+                        }
+                        h1{
+                            font-size: 2rem;
+                            font-weight: bold;
+                            color: #4a70d0;
+                            margin-bottom: 1rem;
+                        }
+                        form{
+                            max-width: 600px;
+                            margin: 0 auto;
+                            padding: 1rem;
+                            display: flex;
+                        }
+                        input{
+                            width: 100%;
+                            padding: 0.5rem;
+                            border-radius: 0.25rem;
+                            margin-bottom: 0.5rem;
+                            outline: none;
+                            border: none;
+                        }
+                        input:focus{
+                            border-color: #6c757d;
+                        }
+                        submit{
+                            width: 100%;
+                            padding: 0.5rem 1rem;
+                            border-radius: 0.25rem;
+                            background-color: #6c757d;
+                            color: #fff;
+                        }
+                        submit:hover{
+                            background-color: #5f6975;
+                        }
+                        submit:focus{
+                            outline: none;
+                        }
+                    </style>
+                </head>
+                <body>
+                    <h1>Введите запрос:</h1>
+                    <form action="/" method="POST">
+                        <input type="text" name="input_value">
+                        <br><br>
+                        <input class="submit" type="submit" value="Поиск">
+                    </form>
+                </body>
+            </html>
